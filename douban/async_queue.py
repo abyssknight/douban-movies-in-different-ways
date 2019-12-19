@@ -29,7 +29,7 @@ async def get_movies(session, movies_queue, page_start):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0',
     }
 
-    async with session.get(url, params=params, headers=headers, proxy='http://localhost:10800') as rv:
+    async with session.get(url, params=params, headers=headers) as rv:
         result = await rv.json()
         for movie in result['subjects']:
             await movies_queue.put(movie)
