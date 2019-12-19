@@ -16,8 +16,13 @@ mkdir_if_not_exsit(covers_dir)
 def main():
     with ThreadPoolExecutor() as exector:
         all_movies = exector.map(get_movies, [i * per_pages for i in range(pages)])
+
+        results = []
         for movies in all_movies:
-            for cover in exector.map(download_cover, movies):
+            results.append(exector.map(download_cover, movies))
+
+        for result in results:
+            for cover in result:
                 cover_name = os.path.join(covers_dir, '{}.jpg'.format(cover['title']))
                 cover_data = cover['data']
                 save_cover(cover_name, cover_data)
