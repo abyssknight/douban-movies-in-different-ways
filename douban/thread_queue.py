@@ -38,10 +38,7 @@ def get_movies(movies_queue, page_start=0):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0',
     }
-    proxies = {
-        "http": "http://localhost:10800",
-    }
-    resp = requests.get(url, params=params, headers=headers, proxies=proxies)
+    resp = requests.get(url, params=params, headers=headers)
     resp.raise_for_status()
 
     # 遍历所有条目 放入队列
