@@ -14,7 +14,7 @@ mkdir_if_not_exsit(covers_dir)
 
 
 def main():
-    with ThreadPoolExecutor() as exector:
+    with ThreadPoolExecutor(max_workers=pages * 3) as exector:
         all_movies = exector.map(get_movies, [i * per_pages for i in range(pages)])
 
         results = []
