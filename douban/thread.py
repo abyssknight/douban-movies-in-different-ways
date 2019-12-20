@@ -13,6 +13,13 @@ covers_dir = os.path.join(os.path.dirname(os.path.abspath(__name__)), 'covers', 
 mkdir_if_not_exsit(covers_dir)
 
 
+def save(cover):
+    cover_name = os.path.join(covers_dir, '{}.jpg'.format(cover['title']))
+    cover_data = cover['data']
+    save_cover(cover_name, cover_data)
+    print(cover_name)
+
+
 def main():
     with ThreadPoolExecutor(max_workers=pages * 3) as exector:
         all_movies = exector.map(get_movies, [i * per_pages for i in range(pages)])
@@ -21,12 +28,8 @@ def main():
         for movies in all_movies:
             results.append(exector.map(download_cover, movies))
 
-        for result in results:
-            for cover in result:
-                cover_name = os.path.join(covers_dir, '{}.jpg'.format(cover['title']))
-                cover_data = cover['data']
-                save_cover(cover_name, cover_data)
-                print(cover_name)
+        for covers in results:
+            exector.map(save, covers)
 
 
 if __name__ == '__main__':
