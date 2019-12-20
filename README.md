@@ -7,3 +7,4 @@
 * [多线程队列请求](./douban/thread_queue.py)
 * [协程请求](./douban/async.py)
 * [协程队列请求](./douban/async_queue.py)
+* [Go 语言协程实现](https://github.com/Abyssknight/douban-movies-in-different-ways-go)
